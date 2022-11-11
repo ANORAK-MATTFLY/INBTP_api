@@ -12,8 +12,24 @@ const resolvers = {
             }
 
             return users;
+        },
+        async getOneUser(_, {email}, ctx){
+            const user = await User.findOne({email});
+            if (user == null) {
+                throw new Error("Can't get any user");
+            }
+            return user;
+        },
+        async getCurrentUser(_, args, {user} ){
+             if (user){
+                return await User.findOne( {
+                    email: user.email
+                } )
+             }
         }
     },
+
+    
 
     Mutation: {
         async login(_, { email, password }, ctx) {

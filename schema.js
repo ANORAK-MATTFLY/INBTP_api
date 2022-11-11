@@ -16,6 +16,8 @@ const typeDefs = gql`
     type Query {
         getUserById(id: String): User!
         getUsersByType(isAdmin: Boolean!): [User]
+        getOneUser(email: String): User!
+        getCurrentUser: User!
     }
 
     type Mutation {

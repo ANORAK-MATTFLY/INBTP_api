@@ -33,6 +33,7 @@ app.use(auth(config));
 
 
 const server = new ApolloServer({
+    playground: {endpoint:"/graphql"},
     formatResponse: (response, requestContext) => {
         if (response.errors && !requestContext.request.variables?.password) {
             if (requestContext.response?.http) {
