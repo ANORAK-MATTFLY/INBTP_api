@@ -11,9 +11,9 @@ const { auth } = require("express-openid-connect");
 const jwt = require('express-jwt');
 const guid = require("guid");
 const app = express();
+const cors = require('cors');
 
-
-app.use(bodyParser.json());
+app.use(bodyParser.json(),cors({ origin: ['http://localhost:3000'] }));
 
 const JWT_SECRET = process.env.JWT_SECRET;
 
