@@ -11,9 +11,9 @@ const { auth } = require("express-openid-connect");
 const jwt = require('express-jwt');
 const guid = require("guid");
 const app = express();
-const cors = require('cors');
 
-app.use(bodyParser.json(),cors({ origin: ['http://localhost:3000'] }));
+
+app.use(bodyParser.json());
 
 const JWT_SECRET = process.env.JWT_SECRET;
 
@@ -33,7 +33,6 @@ app.use(auth(config));
 
 
 const server = new ApolloServer({
-    playground: {endpoint:"/graphql"},
     formatResponse: (response, requestContext) => {
         if (response.errors && !requestContext.request.variables?.password) {
             if (requestContext.response?.http) {

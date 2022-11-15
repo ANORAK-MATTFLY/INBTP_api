@@ -3,6 +3,7 @@ const User = require('./models/model');
 const { v4: uuidv4 } = require("uuid");
 const jwt = require("jsonwebtoken");
 
+
 const resolvers = {
     Query: {
         async getUsersByType(_, { isAdmin }, ctx) {
@@ -13,23 +14,23 @@ const resolvers = {
 
             return users;
         },
-        async getOneUser(_, {email}, ctx){
-            const user = await User.findOne({email});
+        async getOneUser(_, { email }, ctx) {
+            const user = await User.findOne({ email });
             if (user == null) {
                 throw new Error("Can't get any user");
             }
             return user;
         },
-        async getCurrentUser(_, args, {user} ){
-             if (user){
-                return await User.findOne( {
+        async getCurrentUser(_, args, { user }) {
+            if (user) {
+                return await User.findOne({
                     email: user.email
-                } )
-             }
+                })
+            }
         }
     },
 
-    
+
 
     Mutation: {
         async login(_, { email, password }, ctx) {
@@ -47,8 +48,8 @@ const resolvers = {
             if (!isValidUser) {
                 throw new Error('Your password is incorrect!');
             }
-            const JWT_SECRET = process.env.JWT_SECRET;
-            const accessToken = jwt.sign({ data: email }, JWT_SECRET, { expiresIn: "5s" });
+
+            const accessToken = jwt.sign({ data: email }, "sign_token", { expiresIn: "5s" });
 
             return accessToken;
         },
