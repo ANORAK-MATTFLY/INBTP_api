@@ -53,7 +53,7 @@ const resolvers = {
 
             return accessToken;
         },
-        async createUser(_, { id, email, userName, userProfilePicture, middleName, sex, password,isAdmin, authorizationLevel }, ctx) {
+        async createUser(_, { email, userName, userProfilePicture, middleName, sex, password, isAdmin, authorizationLevel }, ctx) {
             const user = await User({
                 id: await uuidv4(),
                 email,
