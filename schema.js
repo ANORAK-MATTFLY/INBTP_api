@@ -12,6 +12,10 @@ const typeDefs = gql`
         userProfilePicture: String!
         password: String!
     }
+    type Promotion{
+        id: String!
+        name: String!
+    }
 
     type Query {
         getUserById(id: String): User!
@@ -21,7 +25,7 @@ const typeDefs = gql`
     }
 
     type Mutation {
-        createUser(email: String!, userName: String!, userProfilePicture: String!, middleName: String!, sex: String!, password: String! ): String!
+        createUser(email: String!, userName: String!, userProfilePicture: String!, middleName: String!, sex: String!, password: String!, authorizationLevel:Int!, isAdmin: Boolean! ): String!
         login(email: String!, password: String!): String!
     }
 `;
