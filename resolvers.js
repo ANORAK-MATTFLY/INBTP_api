@@ -53,7 +53,7 @@ const resolvers = {
 
             return accessToken;
         },
-        async createUser(_, { id, email, userName, userProfilePicture, middleName, sex, password }, ctx) {
+        async createUser(_, { id, email, userName, userProfilePicture, middleName, sex, password,isAdmin, authorizationLevel }, ctx) {
             const user = await User({
                 id: await uuidv4(),
                 email,
@@ -61,8 +61,8 @@ const resolvers = {
                 userProfilePicture,
                 middleName,
                 sex,
-                isAdmin: false,
-                authorizationLevel: 3,
+                isAdmin,
+                authorizationLevel,
                 password
             });
             await user.save().then(result => result).catch(error => { throw new Error(error); });
